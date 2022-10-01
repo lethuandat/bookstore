@@ -215,16 +215,32 @@
             </div>
           </div>
         </div>
-        <div class="col-12">
-          <nav>
-            <ul class="pagination justify-content-center">
-              <li class="page-item disabled"><a class="page-link" href="#">Trước</a></li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">Sau</a></li>
-            </ul>
-          </nav>
+        <div class="col-12 mt-5">
+          <div [ngStyle]="{'display':displayPagination}">
+            <div style="position: absolute;bottom: 26px;right: 49px">
+              <div style="display: flex;align-items: center;justify-content: center">
+<!--                <span style="margin: 0 10px 0 0">Số phần tử của trang:</span>-->
+<!--                <select (change)="changePageSize($event)" style="width: 80px" class="form-select">-->
+<!--                  <option value="6">6</option>-->
+<!--                  <option value="9">9</option>-->
+<!--                  <option value="12">12</option>-->
+<!--                </select>-->
+                <span style="margin: 0 20px 0 40px">
+                    {{pageSize * indexPagination + 1}} - {{pageSize * indexPagination + numberOfElement}}
+                  trên {{totalElements}}
+          </span>
+                <a (click)="previousPage($event)" [ngStyle]="{'display':previousPageStyle}" type="button"
+                        class="btn btn-warning">
+                 Trước
+                </a>
+                <a (click)="nextPage($event)" [ngStyle]="{'display':nextPageStyle}" style="margin-left: 10px"
+                        type="button"
+                        class="btn btn-warning">
+                  Sau
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

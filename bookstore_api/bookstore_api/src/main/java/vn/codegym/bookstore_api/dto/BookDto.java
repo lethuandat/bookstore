@@ -1,6 +1,5 @@
 package vn.codegym.bookstore_api.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,10 +7,8 @@ import vn.codegym.bookstore_api.entity.Category;
 import vn.codegym.bookstore_api.entity.Discount;
 import vn.codegym.bookstore_api.entity.Orders;
 
-import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 

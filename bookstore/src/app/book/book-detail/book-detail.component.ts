@@ -13,6 +13,7 @@ export class BookDetailComponent implements OnInit {
   name: string;
   description: string;
   image: string;
+  size: string;
   price: number;
   numberOfPage: number;
   quantity: number;
@@ -38,6 +39,7 @@ export class BookDetailComponent implements OnInit {
       this.name = book.name;
       this.description = book.description;
       this.image = book.image;
+      this.size = book.size;
       this.price = book.price;
       this.numberOfPage = book.numberOfPage;
       this.author = book.author;

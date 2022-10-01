@@ -35,6 +35,6 @@ export class BookService {
   }
 
   update(id: number, book: Book): Observable<Book> {
-    return this.http.put<Book>(`${API_URL}/api/book/${id}`, book);
+    return this.http.put<Book>(`${API_URL}/api/book/update/${id}`, book);
   }
 }

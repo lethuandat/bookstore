@@ -1,119 +1,155 @@
-<!-- Add Book Start -->
+<!-- Update Book Start -->
 <div class="container-fluid">
   <div class="row px-xl-5">
     <div class="col-lg-12">
       <h5 class="section-title position-relative text-uppercase mb-3"><span
-        class="bg-secondary pr-3">Thêm mới đầu sách</span>
+        class="bg-secondary pr-3">Cập nhật sách</span>
       </h5>
       <div class="bg-light p-30 mb-5">
         <form [formGroup]="bookForm" (ngSubmit)="submit()">
           <div class="row">
-            <div class="col-md-3"></div>
             <div class="col-md-6 form-group">
-              <label>Tên sách</label>
+              <label>Mã sách</label>
+              <input class="form-control" disabled type="text" formControlName="id">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>Tên sách <span class="text-danger">*</span></label>
               <input class="form-control" type="text" placeholder="Tên sách" formControlName="name">
+              <div class="text-danger form-text"
+                   *ngIf="bookForm.controls.name.hasError('required') && bookForm.controls.name.touched">
+                * Vui lòng nhập tên sách
+              </div>
             </div>
-            <div class="col-md-3"></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3"></div>
             <div class="col-md-6 form-group">
-              <label>Chi tiết sách</label>
-              <textarea class="form-control" placeholder="Chi tiết sách" formControlName="description"></textarea>
-            </div>
-            <div class="col-md-3"></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6 form-group">
-              <label>Số trang</label>
+              <label>Số trang <span class="text-danger">*</span></label>
               <input class="form-control" type="text" placeholder="Số trang" formControlName="numberOfPage">
+              <div class="text-danger form-text"
+                   *ngIf="bookForm.controls.numberOfPage.hasError('required') && bookForm.controls.numberOfPage.touched">
+                * Vui lòng nhập số trang
+              </div>
+              <div class="form-text text-danger"
+                   *ngIf="bookForm.controls.numberOfPage.hasError('pattern') && bookForm.controls.numberOfPage.touched">
+                * Vui lòng nhập số trang sách là số nguyên và lớn hơn 0
+              </div>
             </div>
-            <div class="col-md-3"></div>
           </div>
           <div class="row">
-            <div class="col-md-3"></div>
             <div class="col-md-6 form-group">
-              <label>Giá</label>
+              <label>Giá <span class="text-danger">*</span></label>
               <input class="form-control" type="text" placeholder="Giá" formControlName="price">
+              <div class="text-danger form-text"
+                   *ngIf="bookForm.controls.price.hasError('required') && bookForm.controls.price.touched">
+                * Vui lòng nhập giá sách
+              </div>
+              <div class="form-text text-danger"
+                   *ngIf="bookForm.controls.price.hasError('pattern') && bookForm.controls.price.touched">
+                * Vui lòng nhập giá sách là số nguyên và lớn hơn 0
+              </div>
             </div>
-            <div class="col-md-3"></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3"></div>
             <div class="col-md-6 form-group">
-              <label>Số lượng</label>
+              <label>Số lượng <span class="text-danger">*</span></label>
               <input class="form-control" type="text" placeholder="Số lượng" formControlName="quantity">
+              <div class="text-danger form-text"
+                   *ngIf="bookForm.controls.quantity.hasError('required') && bookForm.controls.quantity.touched">
+                * Vui lòng nhập số lượng sách
+              </div>
+              <div class="form-text text-danger"
+                   *ngIf="bookForm.controls.quantity.hasError('pattern') && bookForm.controls.quantity.touched">
+                * Vui lòng nhập số lượng sách là số nguyên và lớn hơn 0
+              </div>
             </div>
-            <div class="col-md-3"></div>
           </div>
           <div class="row">
-            <div class="col-md-3"></div>
             <div class="col-md-6 form-group">
-              <label>Tác giả</label>
+              <label>Tác giả <span class="text-danger">*</span></label>
               <input class="form-control" type="text" placeholder="Tác giả" formControlName="author">
+              <div class="text-danger form-text"
+                   *ngIf="bookForm.controls.author.hasError('required') && bookForm.controls.author.touched">
+                * Vui lòng nhập tên tác giả
+              </div>
             </div>
-            <div class="col-md-3"></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3"></div>
             <div class="col-md-6 form-group">
-              <label>Kích thước</label>
-              <input class="form-control" type="text" placeholder="Dài x rộng" formControlName="size">
-            </div>
-            <div class="col-md-3"></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6 form-group">
-              <label>Ngày phát hành</label>
-              <input class="form-control" type="date" formControlName="date">
-            </div>
-            <div class="col-md-3"></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6 form-group">
-              <label>Thể loại</label>
-              <select class="custom-select" formControlName="categories">
-                <option selected value="" disabled>---Chọn---</option>
-                <option *ngFor="let item of categories" [ngValue]="item.id">{{ item.name }}</option>
-              </select>
-            </div>
-            <div class="col-md-3"></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6 form-group">
-              <label>Nhà xuất bản</label>
+              <label>Nhà xuất bản <span class="text-danger">*</span></label>
               <input class="form-control" type="text" placeholder="Nhà xuất bản" formControlName="company">
+              <div class="text-danger form-text"
+                   *ngIf="bookForm.controls.company.hasError('required') && bookForm.controls.company.touched">
+                * Vui lòng nhập nhà xuất bản
+              </div>
             </div>
-            <div class="col-md-3"></div>
           </div>
-<!--          <div class="row">-->
-<!--            <div class="col-md-3"></div>-->
-<!--            <div class="col-md-6 custom-file">-->
-<!--              <label class="custom-file-label">Chọn ảnh</label>-->
-<!--              <input type="file" class="custom-file-input" (change)="selectFile($event); onFileSelected($event)" formControlName="image" #fileUploader>-->
-<!--              <img [src]="url" width="60px" height="125px" alt="" (click)="fileUploader.click()">-->
-<!--              &lt;!&ndash;            <img *ngIf="!editImageState" [src]="employeeForm.get('image').value" width="100%" height="auto">&ndash;&gt;-->
-<!--              &lt;!&ndash;            <img class="form-control mt-2" [src]="url" *ngIf="editImageState" width="100%" height="auto">&ndash;&gt;-->
-<!--              &lt;!&ndash;            <div class="form-text" *ngIf="checkImgSize == true">Kích thước ảnh quá lớn !!</div>&ndash;&gt;-->
-<!--              &lt;!&ndash;            <div class="form-text" *ngIf="checkImg == true && checkImgSize == false && regexImageUrl == false">Vui&ndash;&gt;-->
-<!--              &lt;!&ndash;              lòng chọn ảnh.&ndash;&gt;-->
-<!--              &lt;!&ndash;            </div>&ndash;&gt;-->
-<!--              &lt;!&ndash;            <div class="form-text" *ngIf="regexImageUrl == true && checkImgSize == false">Chỉ chấp nhận ảnh có định&ndash;&gt;-->
-<!--              &lt;!&ndash;              dạng .jpg.&ndash;&gt;-->
-<!--              &lt;!&ndash;            </div>&ndash;&gt;-->
-<!--            </div>-->
-<!--            <div class="col-md-3"></div>-->
-<!--          </div>-->
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>Kích thước <span class="text-danger">*</span></label>
+              <input class="form-control" type="text" placeholder="Dài x rộng" formControlName="size">
+              <div class="text-danger form-text"
+                   *ngIf="bookForm.controls.size.hasError('required') && bookForm.controls.size.touched">
+                * Vui lòng nhập kích thước
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Ngày phát hành <span class="text-danger">*</span></label>
+              <input class="form-control" type="date" formControlName="date">
+              <div class="text-danger form-text"
+                   *ngIf="bookForm.controls.date.hasError('required') && bookForm.controls.date.touched">
+                * Vui lòng nhập ngày phát hành
+              </div>
+              <div class="form-text text-danger"
+                   *ngIf="bookForm.controls.date.hasError('checkDay') && bookForm.controls.date.touched">
+                * Ngày phát hành không được lớn hơn ngày hiện tại.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>Thể loại <span class="text-danger">*</span></label>
+              <select class="custom-select" formControlName="categories" [compareWith]="compareWithId">
+                <option selected value="" disabled>---Chọn---</option>
+                <option *ngFor="let item of categories" [ngValue]="item">{{ item.name }}</option>
+              </select>
+              <div class="text-danger form-text"
+                   *ngIf="bookForm.controls.categories.hasError('required') && bookForm.controls.categories.touched">
+                * Vui lòng chọn thể loại
+              </div>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Chi tiết sách <span class="text-danger">*</span></label>
+              <textarea rows="5" class="form-control" placeholder="Chi tiết sách" formControlName="description"></textarea>
+              <div class="text-danger form-text"
+                   *ngIf="bookForm.controls.description.hasError('required') && bookForm.controls.description.touched">
+                * Vui lòng nhập chi tiết sách
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-6 custom-file form-group">
+              <label class="custom-file-label">Nhấn để chọn ảnh</label>
+              <input type="file" class="custom-file-input" (change)="selectFile($event); onFileSelected($event)">
+            </div>
+            <div class="col-md-6 custom-file form-group">
+              <figure>
+                <img *ngIf="!editImageState" [src]="bookForm.get('image').value" alt="">
+                <img class="form-control mt-2" [src]="url" *ngIf="editImageState" alt="">
+              </figure>
+              <div class="form-text" *ngIf="checkImgSize == true">Kích thước ảnh quá lớn !!</div>
+              <div class="form-text" *ngIf="checkImg == true && checkImgSize == false && regexImageUrl == false">* Vui
+                lòng chọn ảnh.
+              </div>
+              <div class="form-text" *ngIf="regexImageUrl == true && checkImgSize == false">* Chỉ chấp nhận ảnh có định
+                dạng .jpg.
+              </div>
+            </div>
+          </div>
           <div class="row mt-5">
             <div class="col-md-3"></div>
-            <div class="col-md-6">
-              <button type="button" class="btn btn-secondary text-dark mx-5" routerLink="/book/list">Quay lại</button>
-              <button class="btn btn-secondary text-dark mx-5" type="reset">Nhập lại</button>
-              <button type="submit" class="btn btn-secondary text-dark mx-5">Cập nhật</button>
+            <div class="col-md-6 form-group">
+              <button type="button" class="btn btn-secondary text-dark mx-5" routerLink="/book/list">Quay lại
+              </button>
+              <button type="button" class="btn btn-secondary text-dark mx-5" (click)="reset(id)">Nhập lại
+              </button>
+              <button type="submit" class="btn btn-secondary text-dark mx-5" [disabled]="bookForm.invalid">Cập nhật</button>
             </div>
             <div class="col-md-3"></div>
           </div>
@@ -122,4 +158,4 @@
     </div>
   </div>
 </div>
-<!-- Add Book End -->
+<!-- Update Book End -->

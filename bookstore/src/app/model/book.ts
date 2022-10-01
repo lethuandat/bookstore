@@ -13,4 +13,5 @@ export interface Book {
   author?: string;
   categories?: Category;
   company?: string;
+  isDeleted?: boolean;
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Book} from "../../model/book";
 import {BookService} from "../book.service";
 import {ToastrService} from "ngx-toastr";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-book-list',
@@ -24,7 +25,10 @@ export class BookListComponent implements OnInit {
   idDelete: number;
 
   constructor(private bookService: BookService,
-              private toastrService: ToastrService) { }
+              private toastrService: ToastrService,
+              private title: Title) {
+    this.title.setTitle("Tất cả sách");
+  }
 
   ngOnInit(): void {
     this.getAll();
@@ -44,7 +48,7 @@ export class BookListComponent implements OnInit {
         this.totalElements = result?.totalElements;
         this.totalPage = new Array(result?.totalPages);
       }
-      // this.checkPreviousAndNext();
+      this.checkPreviousAndNext();
     });
   }
 
@@ -58,5 +62,51 @@ export class BookListComponent implements OnInit {
       this.ngOnInit();
       this.toastrService.success('Xóa thành công', 'Thông báo');
     });
+  }
+
+  previousPage(event: any) {
+    event.preventDefault();
+    this.indexPagination--;
+    this.ngOnInit();
+  }
+
+  nextPage(event: any) {
+    event.preventDefault();
+    this.indexPagination++;
+    this.ngOnInit();
+  }
+
+  checkPreviousAndNext() {
+    if (this.indexPagination === 0) {
+      this.previousPageStyle = 'none';
+    } else if (this.indexPagination !== 0) {
+      this.previousPageStyle = 'inline-block';
+    }
+    if (this.indexPagination < (this.totalPage.length - 1)) {
+      this.nextPageStyle = 'inline-block';
+    } else if (this.indexPagination === (this.totalPage.length - 1) || this.indexPagination > (this.totalPage.length - 1)) {
+      this.nextPageStyle = 'none';
+    }
+  }
+
+  changePageSize(event: any) {
+    switch (event.target.value) {
+      case '6' :
+        this.pageSize = 6;
+        this.indexPagination = 0;
+        this.ngOnInit();
+        break;
+      case '9' :
+        this.pageSize = 9;
+        this.indexPagination = 0;
+        this.ngOnInit();
+        break;
+      case '12':
+        this.pageSize = 12;
+        this.indexPagination = 0;
+        this.ngOnInit();
+        break;
+
+    }
   }
 }

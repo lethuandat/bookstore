@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {BookService} from "../book.service";
 import {ToastrService} from "ngx-toastr";
 import {AngularFireStorage} from "@angular/fire/storage";
@@ -9,6 +9,7 @@ import {Book} from "../../model/book";
 import {finalize} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {formatDate} from "@angular/common";
+import {checkDay} from "../../validated/check-day";
 
 @Component({
   selector: 'app-book-create',
@@ -27,17 +28,17 @@ export class BookCreateComponent implements OnInit {
   categories: Category[] = [];
   bookForm: FormGroup = new FormGroup({
     id: new FormControl(''),
-    name: new FormControl(''),
-    description: new FormControl(''),
+    name: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
     image: new FormControl(''),
-    size: new FormControl(''),
-    price: new FormControl(''),
-    numberOfPage: new FormControl(''),
-    quantity: new FormControl(''),
-    date: new FormControl(''),
-    author: new FormControl(''),
-    categories: new FormControl(''),
-    company: new FormControl('')
+    size: new FormControl('', [Validators.required]),
+    price: new FormControl('', [Validators.required, Validators.pattern('^\\d*[1-9]\\d*$')]),
+    numberOfPage: new FormControl('', [Validators.required, Validators.pattern('^\\d*[1-9]\\d*$')]),
+    quantity: new FormControl('', [Validators.required, Validators.pattern('^\\d*[1-9]\\d*$')]),
+    date: new FormControl('', [Validators.required, checkDay]),
+    author: new FormControl('', [Validators.required]),
+    categories: new FormControl('', [Validators.required]),
+    company: new FormControl('', [Validators.required])
   });
 
   constructor(private bookService: BookService,
@@ -65,7 +66,6 @@ export class BookCreateComponent implements OnInit {
     this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(finalize(() => {
         fileRef.getDownloadURL().subscribe((url) => {
           this.bookForm.patchValue({image: url});
-          console.log(url);
           book = {
             name: this.bookForm.value.name,
             description: this.bookForm.value.description,
@@ -78,12 +78,14 @@ export class BookCreateComponent implements OnInit {
             author: this.bookForm.value.author,
             categories: this.bookForm.value.categories,
             company: this.bookForm.value.company,
+            isDeleted: false
           };
           this.bookService.save(book).subscribe(() => {
             this.router.navigate(['/book/list']);
-            this.toastrService.success('Thêm mới sách thành công.', 'Thông báo');
+            this.toastrService.success('Thêm mới thành công.', 'Thông báo');
           }, error => {
-            this.toastrService.error('Thêm mới sách thất bại.', 'Thông báo');
+            console.log(error);
+            this.toastrService.error('Thêm mới thất bại.', 'Thông báo');
           });
         });
       })
@@ -131,7 +133,6 @@ export class BookCreateComponent implements OnInit {
     }
     const reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
-    // tslint:disable-next-line:variable-name
     reader.onload = (_event) => {
       this.msg = '';
       this.url = reader.result;

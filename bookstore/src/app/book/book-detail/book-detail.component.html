@@ -36,6 +36,7 @@
     <div class="col-lg-7 h-auto mb-30">
       <div class="h-100 bg-light p-30">
         <h3>{{name}}</h3>
+        <p>Mã sách: #{{id}}</p>
         <div class="d-flex mb-3">
           <div class="text-primary mr-2">
             <small class="fas fa-star"></small>
@@ -105,11 +106,12 @@
             <p>Nhà xuất bản: {{company}}</p>
             <p>Thời gian phát hành: {{date | date: "dd/MM/yyyy"}}</p>
             <p>Số trang: {{numberOfPage}}</p>
+            <p>Kích thước: {{size}}</p>
           </div>
           <div class="tab-pane fade" id="tab-pane-3">
             <div class="row">
               <div class="col-md-6">
-                <h4 class="mb-4">1 đánh giá về "Đắc nhân tâm"</h4>
+                <h4 class="mb-4">1 đánh giá về {{name}}</h4>
                 <div class="media mb-4">
                   <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
                        style="width: 45px;">

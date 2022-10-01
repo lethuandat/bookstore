@@ -12,6 +12,7 @@ import {HomeComponent} from "./home/home.component";
 import {BookModule} from "./book/book.module";
 import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {ToastrModule} from "ngx-toastr";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     BookModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     ToastrModule.forRoot({
