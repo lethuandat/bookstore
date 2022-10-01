@@ -1,0 +1,129 @@
+<!-- Add Book Start -->
+<div class="container-fluid">
+  <div class="row px-xl-5">
+    <div class="col-lg-12">
+      <h5 class="section-title position-relative text-uppercase mb-3"><span
+        class="bg-secondary pr-3">Thêm mới đầu sách</span>
+      </h5>
+      <div class="bg-light p-30 mb-5">
+        <form [formGroup]="bookForm" (ngSubmit)="submit()">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 form-group">
+              <label>Tên sách</label>
+              <input class="form-control" type="text" placeholder="Tên sách" formControlName="name">
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 form-group">
+              <label>Chi tiết sách</label>
+              <textarea class="form-control" placeholder="Chi tiết sách" formControlName="description"></textarea>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 form-group">
+              <label>Số trang</label>
+              <input class="form-control" type="text" placeholder="Số trang" formControlName="numberOfPage">
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 form-group">
+              <label>Giá</label>
+              <input class="form-control" type="text" placeholder="Giá" formControlName="price">
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 form-group">
+              <label>Số lượng</label>
+              <input class="form-control" type="text" placeholder="Số lượng" formControlName="quantity">
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 form-group">
+              <label>Tác giả</label>
+              <input class="form-control" type="text" placeholder="Tác giả" formControlName="author">
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 form-group">
+              <label>Kích thước</label>
+              <input class="form-control" type="text" placeholder="Dài x rộng" formControlName="size">
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 form-group">
+              <label>Ngày phát hành</label>
+              <input class="form-control" type="date" formControlName="date">
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 form-group">
+              <label>Thể loại</label>
+              <select class="custom-select" formControlName="categories">
+                <option selected value="" disabled>---Chọn---</option>
+                <option *ngFor="let item of categories" [ngValue]="item.id">{{ item.name }}</option>
+              </select>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 form-group">
+              <label>Nhà xuất bản</label>
+              <input class="form-control" type="text" placeholder="Nhà xuất bản" formControlName="company">
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 custom-file">
+              <label class="custom-file-label">Chọn ảnh</label>
+              <input type="file" class="custom-file-input" (change)="selectFile($event); onFileSelected($event)" formControlName="image" #fileUploader>
+              <img [src]="url" width="60px" height="125px" alt="" (click)="fileUploader.click()">
+              <!--            <img *ngIf="!editImageState" [src]="employeeForm.get('image').value" width="100%" height="auto">-->
+              <!--            <img class="form-control mt-2" [src]="url" *ngIf="editImageState" width="100%" height="auto">-->
+              <!--            <div class="form-text" *ngIf="checkImgSize == true">Kích thước ảnh quá lớn !!</div>-->
+              <!--            <div class="form-text" *ngIf="checkImg == true && checkImgSize == false && regexImageUrl == false">Vui-->
+              <!--              lòng chọn ảnh.-->
+              <!--            </div>-->
+              <!--            <div class="form-text" *ngIf="regexImageUrl == true && checkImgSize == false">Chỉ chấp nhận ảnh có định-->
+              <!--              dạng .jpg.-->
+              <!--            </div>-->
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+          <div class="row mt-5">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <button type="button" class="btn btn-secondary text-dark mx-5" routerLink="/book/list">Quay lại
+              </button>
+              <button class="btn btn-secondary text-dark mx-5" type="reset">Nhập lại
+              </button>
+              <button type="submit" class="btn btn-secondary text-dark mx-5">Thêm
+                mới
+              </button>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Book End -->
