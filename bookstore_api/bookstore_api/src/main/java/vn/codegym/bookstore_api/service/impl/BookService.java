@@ -20,6 +20,12 @@ public class BookService implements IBookService {
         return bookRepository.findAll(pageable, keyword);
     }
 
+
+    @Override
+    public Page<Book> findAllByCategory(Pageable pageable, String keyword, Integer categoryId) {
+        return bookRepository.findAllByCategory(pageable, keyword, categoryId);
+    }
+
     @Override
     public Optional<Book> findById(Integer id) {
         return bookRepository.findById(id);

@@ -1,0 +1,70 @@
+<!-- Sign-up Start-->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+      <div class="form-title text-center">
+        <h4>ĐĂNG KÝ</h4>
+      </div>
+      <div>
+        <div class="form-group">
+          <input type="email" class="form-control" id="email1" autofocus formControlName="username"
+                 placeholder="Tên đăng nhập...">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" id="password1" formControlName="password" required
+                 placeholder="Mật khẩu...">
+        </div>
+        <h5>THÔNG TIN CÁ NHÂN</h5>
+        <div class="form-group">
+          <input type="text" class="form-control"
+                 placeholder="Họ tên..." formControlName="name">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control"
+                 placeholder="Email..." formControlName="email">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control"
+                 placeholder="Số điện thoại..." formControlName="phone">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control"
+                 placeholder="Địa chỉ..." formControlName="address">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control"
+                 placeholder="Ảnh..." formControlName="image">
+        </div>
+        <div class="form-group">
+          <input type="date" class="form-control"
+                 placeholder="Ngày sinh..." formControlName="birthDay">
+        </div>
+        <div class="custom-control custom-checkbox mb-3">
+          <input type="checkbox" class="custom-control-input me-2" id="customCheck1" formControlName="remember_me">
+          <label class="custom-control-label" for="customCheck1">Ghi nhớ đăng nhập lần sau</label>
+        </div>
+        <button type="submit" class="btn btn-warning btn-block btn-round">Đăng ký</button>
+      </div>
+
+      <div class="text-center text-muted delimiter">Hoặc đăng ký bằng</div>
+      <div class="d-flex justify-content-center social-buttons">
+        <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip"
+                data-placement="top" title="Twitter">
+          <i class="fab fa-twitter"></i>
+        </button>
+        <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip"
+                data-placement="top" title="Facebook">
+          <i class="fab fa-facebook"></i>
+        </button>
+        <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip"
+                data-placement="top" title="Linkedin">
+          <i class="fab fa-linkedin"></i>
+        </button>
+      </div>
+      <div class="signup-section" align="center">Bạn đã có tài khoản? <a routerLink="/login" class="text-info"> Đăng nhập ngay</a></div>
+    </div>
+    <div class="col-lg-3"></div>
+  </div>
+</div>
+<!-- Sign-up End-->

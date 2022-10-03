@@ -4,6 +4,8 @@ import {BookListComponent} from "./book-list/book-list.component";
 import {BookCreateComponent} from "./book-create/book-create.component";
 import {BookUpdateComponent} from "./book-update/book-update.component";
 import {BookDetailComponent} from "./book-detail/book-detail.component";
+import {AuthGuard} from "../security/auth.guard";
+import {CartListComponent} from "../cart/cart-list/cart-list.component";
 
 
 const routes: Routes = [
@@ -13,15 +15,31 @@ const routes: Routes = [
   },
   {
     path: 'book/create',
-    component: BookCreateComponent
+    canActivate: [AuthGuard],
+    component: BookCreateComponent,
+    data: {
+      roles: ['ROLE_ADMIN']
+    }
   },
   {
     path: 'book/edit/:id',
-    component: BookUpdateComponent
+    canActivate: [AuthGuard],
+    component: BookUpdateComponent,
+    data: {
+      roles: ['ROLE_ADMIN']
+    }
   },
   {
     path: 'book/detail/:id',
     component: BookDetailComponent
+  },
+  {
+    path: 'cart/list',
+    component: CartListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_USER']
+    }
   }
 ];
 

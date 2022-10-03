@@ -15,26 +15,30 @@ export class BookService {
   constructor(private http: HttpClient) { }
 
   findAll(page: number, keyword: string, size: number): Observable<Book[]> {
-    return this.http.get<Book[]>(API_URL + '/api/book/list?page=' + page + '&keyword=' + keyword + '&size=' + size);
+    return this.http.get<Book[]>(API_URL + '/api/public/book/list?page=' + page + '&keyword=' + keyword + '&size=' + size);
+  }
+
+  findAllByCategory(page: number, keyword: string, categoryId: number, size: number): Observable<Book[]> {
+    return this.http.get<Book[]>(API_URL + '/api/public/book/list?page=' + page + '&keyword=' + keyword + '&categoryId=' + categoryId + '&size=' + size);
   }
 
   findAllCategory(): Observable<Category[]> {
-    return this.http.get<Category[]>(API_URL + '/api/category/list');
+    return this.http.get<Category[]>(API_URL + '/api/public/category/list');
   }
 
   findById(id: number): Observable<Book> {
-    return this.http.get<Book>(`${API_URL}/api/book/${id}`);
+    return this.http.get<Book>(`${API_URL}/api/public/book/${id}`);
   }
 
   delete(id: number): Observable<Book> {
-    return this.http.delete<Book>(`${API_URL}/api/book/${id}`);
+    return this.http.delete<Book>(`${API_URL}/api/public/book/${id}`);
   }
 
   save(book): Observable<Book> {
-    return this.http.post<Book>(`${API_URL}/api/book/create`, book);
+    return this.http.post<Book>(`${API_URL}/api/public/book/create`, book);
   }
 
   update(id: number, book: Book): Observable<Book> {
-    return this.http.put<Book>(`${API_URL}/api/book/update/${id}`, book);
+    return this.http.put<Book>(`${API_URL}/api/public/book/update/${id}`, book);
   }
 }

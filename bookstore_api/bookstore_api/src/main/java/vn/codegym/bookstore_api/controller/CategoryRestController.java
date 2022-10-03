@@ -13,8 +13,8 @@ import vn.codegym.bookstore_api.service.ICategoryService;
 import java.util.List;
 
 @RestController
-@CrossOrigin
-@RequestMapping("/api/category")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/api/public/category")
 public class CategoryRestController {
     @Autowired
     ICategoryService iCategoryService;

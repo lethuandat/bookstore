@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin
-@RequestMapping("/api/book")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/api/public/book")
 public class BookRestController {
     @Autowired
     IBookService iBookService;
@@ -29,6 +29,17 @@ public class BookRestController {
     public ResponseEntity<Page<Book>> findAll(@PageableDefault(value = 9) Pageable pageable,
                                               @RequestParam Optional<String> keyword) {
         Page<Book> books = iBookService.findAll(pageable, keyword.orElse(""));
+        if (books.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/listByCategory")
+    public ResponseEntity<Page<Book>> findAllByCategory(@PageableDefault(value = 9) Pageable pageable,
+                                              @RequestParam Optional<String> keyword, @RequestParam Integer categoryId) {
+        Page<Book> books = iBookService.findAllByCategory(pageable, keyword.orElse(""), categoryId);
         if (books.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -56,7 +67,7 @@ public class BookRestController {
         BeanUtils.copyProperties(bookDto, book);
         this.iBookService.save(book);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 

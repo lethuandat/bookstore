@@ -14,6 +14,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CartModule} from "./cart/cart.module";
+import {SecurityModule} from "./security/security.module";
+import {ContactModule} from "./contact/contact.module";
+import {PaymentModule} from "./payment/payment.module";
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import {CartModule} from "./cart/cart.module";
     AngularFirestoreModule,
     BookModule,
     CartModule,
+    SecurityModule,
+    ContactModule,
+    PaymentModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,

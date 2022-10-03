@@ -47,99 +47,64 @@
       </div>
       <!-- Price End -->
 
-      <!-- Color Start -->
+      <!-- Category Start -->
       <h5 class="section-title position-relative text-uppercase mb-3"><span
         class="bg-secondary pr-3">Lọc theo thể loại</span>
       </h5>
       <div class="bg-light p-4 mb-30">
-        <div>
+        <div *ngFor="let item of categories">
+<!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+<!--            <input type="checkbox" class="custom-control-input" checked id="color-all">-->
+<!--            <label class="custom-control-label" for="price-all">Tất cả thể loại</label>-->
+<!--            <span class="badge border font-weight-normal">1000</span>-->
+<!--          </div>-->
           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" checked id="color-all">
-            <label class="custom-control-label" for="price-all">Tất cả thể loại</label>
-            <span class="badge border font-weight-normal">1000</span>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="color-1">
-            <label class="custom-control-label" for="color-1">Văn học Việt Nam</label>
+            <input type="checkbox" class="custom-control-input" [id]="item.id" (click)="getAllByCategory(item.id)">
+            <label class="custom-control-label">{{item.name}}</label>
             <span class="badge border font-weight-normal">150</span>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="color-2">
-            <label class="custom-control-label" for="color-2">Văn học nước ngoài</label>
-            <span class="badge border font-weight-normal">295</span>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="color-3">
-            <label class="custom-control-label" for="color-3">Thiếu nhi</label>
-            <span class="badge border font-weight-normal">246</span>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="color-4">
-            <label class="custom-control-label" for="color-4">Thời sự - Chính trị</label>
-            <span class="badge border font-weight-normal">145</span>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="color-5">
-            <label class="custom-control-label" for="color-5">Khoa học - Nhân văn</label>
-            <span class="badge border font-weight-normal">168</span>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="color-6">
-            <label class="custom-control-label" for="color-5">Sách tham khảo</label>
-            <span class="badge border font-weight-normal">168</span>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="color-7">
-            <label class="custom-control-label" for="color-5">Sách tái bản</label>
-            <span class="badge border font-weight-normal">168</span>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-            <input type="checkbox" class="custom-control-input" id="color-8">
-            <label class="custom-control-label" for="color-5">Sách kinh tế</label>
-            <span class="badge border font-weight-normal">168</span>
           </div>
         </div>
       </div>
-      <!-- Color End -->
+      <!-- Category End -->
 
       <!-- Size Start -->
-      <h5 class="section-title position-relative text-uppercase mb-3"><span
-        class="bg-secondary pr-3">Filter by size</span>
-      </h5>
-      <div class="bg-light p-4 mb-30">
-        <div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" checked id="size-all">
-            <label class="custom-control-label" for="size-all">All Size</label>
-            <span class="badge border font-weight-normal">1000</span>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="size-1">
-            <label class="custom-control-label" for="size-1">XS</label>
-            <span class="badge border font-weight-normal">150</span>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="size-2">
-            <label class="custom-control-label" for="size-2">S</label>
-            <span class="badge border font-weight-normal">295</span>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="size-3">
-            <label class="custom-control-label" for="size-3">M</label>
-            <span class="badge border font-weight-normal">246</span>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="size-4">
-            <label class="custom-control-label" for="size-4">L</label>
-            <span class="badge border font-weight-normal">145</span>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-            <input type="checkbox" class="custom-control-input" id="size-5">
-            <label class="custom-control-label" for="size-5">XL</label>
-            <span class="badge border font-weight-normal">168</span>
-          </div>
-        </div>
-      </div>
+<!--      <h5 class="section-title position-relative text-uppercase mb-3"><span-->
+<!--        class="bg-secondary pr-3">Filter by size</span>-->
+<!--      </h5>-->
+<!--      <div class="bg-light p-4 mb-30">-->
+<!--        <div>-->
+<!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+<!--            <input type="checkbox" class="custom-control-input" checked id="size-all">-->
+<!--            <label class="custom-control-label" for="size-all">All Size</label>-->
+<!--            <span class="badge border font-weight-normal">1000</span>-->
+<!--          </div>-->
+<!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+<!--            <input type="checkbox" class="custom-control-input" id="size-1">-->
+<!--            <label class="custom-control-label" for="size-1">XS</label>-->
+<!--            <span class="badge border font-weight-normal">150</span>-->
+<!--          </div>-->
+<!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+<!--            <input type="checkbox" class="custom-control-input" id="size-2">-->
+<!--            <label class="custom-control-label" for="size-2">S</label>-->
+<!--            <span class="badge border font-weight-normal">295</span>-->
+<!--          </div>-->
+<!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+<!--            <input type="checkbox" class="custom-control-input" id="size-3">-->
+<!--            <label class="custom-control-label" for="size-3">M</label>-->
+<!--            <span class="badge border font-weight-normal">246</span>-->
+<!--          </div>-->
+<!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+<!--            <input type="checkbox" class="custom-control-input" id="size-4">-->
+<!--            <label class="custom-control-label" for="size-4">L</label>-->
+<!--            <span class="badge border font-weight-normal">145</span>-->
+<!--          </div>-->
+<!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">-->
+<!--            <input type="checkbox" class="custom-control-input" id="size-5">-->
+<!--            <label class="custom-control-label" for="size-5">XL</label>-->
+<!--            <span class="badge border font-weight-normal">168</span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
       <!-- Size End -->
     </div>
     <!-- Shop Sidebar End -->
@@ -153,7 +118,7 @@
             <div>
               <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
               <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
-              <button type="button" class="btn btn-sm btn-warning text-dark mx-4" routerLink="/book/create">Thêm mới
+              <button *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1" type="button" class="btn btn-sm btn-warning text-dark mx-4" routerLink="/book/create">Thêm mới
               </button>
             </div>
             <div class="ml-2">
@@ -186,13 +151,13 @@
             <div class="product-img position-relative overflow-hidden">
               <img class="img-fluid w-100" src="{{item.image}}" alt="">
               <div class="product-action">
-                <a class="btn btn-outline-dark btn-square" href=""><i
+                <a class="btn btn-outline-dark btn-square" routerLink="cart/list"><i
                   class="fa fa-shopping-cart"></i></a>
                 <a class="btn btn-outline-dark btn-square" [routerLink]="['/book/detail', item.id]"><i
                   class="fa fa-info"></i></a>
-                <a class="btn btn-outline-dark btn-square" [routerLink]="['/book/edit', item.id]"><i
+                <a class="btn btn-outline-dark btn-square" *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1" [routerLink]="['/book/edit', item.id]"><i
                   class="fa fa-edit"></i></a>
-                <a class="btn btn-outline-dark btn-square" (click)="openDelete(item)" data-toggle="modal"
+                <a class="btn btn-outline-dark btn-square" *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1" (click)="openDelete(item)" data-toggle="modal"
                    data-target="#deleteModal"><i class="fa fa-trash"></i></a>
               </div>
             </div>

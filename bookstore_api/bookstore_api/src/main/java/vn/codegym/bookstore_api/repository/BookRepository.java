@@ -24,6 +24,42 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     Page<Book> findAll(Pageable pageable, @Param("keyword") String keyword);
 
 
+    @Query(value = "select * " +
+            "from book " +
+            "where `name` like %:keyword% " +
+            "and `description` like %:keyword% " +
+            "and author like %:keyword% " +
+            "and company like %:keyword% " +
+            "and is_deleted = 0 " +
+            "and category_id = :categoryId " +
+            "order by id desc",
+            nativeQuery = true)
+    Page<Book> findAllByCategory(Pageable pageable, @Param("keyword") String keyword, @Param("categoryId") Integer categoryId);
+
+
+    @Query(value = "select * " +
+            "from book " +
+            "where `name` like %:keyword% " +
+            "and `description` like %:keyword% " +
+            "and author like %:keyword% " +
+            "and company like %:keyword% " +
+            "and is_deleted = 0 " +
+            "order by price",
+            nativeQuery = true)
+    Page<Book> findAllAndSortByPriceAsc(Pageable pageable, @Param("keyword") String keyword);
+
+
+    @Query(value = "select * " +
+            "from book " +
+            "where `name` like %:keyword% " +
+            "and `description` like %:keyword% " +
+            "and author like %:keyword% " +
+            "and company like %:keyword% " +
+            "and is_deleted = 0 " +
+            "order by price desc",
+            nativeQuery = true)
+    Page<Book> findAllAndSortByPriceDesc(Pageable pageable, @Param("keyword") String keyword);
+
     @Transactional
     @Modifying
     @Query(value = "update book " +
