@@ -18,8 +18,8 @@ export class BookService {
     return this.http.get<Book[]>(API_URL + '/api/public/book/list?page=' + page + '&keyword=' + keyword + '&size=' + size);
   }
 
-  findAllByCategory(page: number, keyword: string, categoryId: number, size: number): Observable<Book[]> {
-    return this.http.get<Book[]>(API_URL + '/api/public/book/list?page=' + page + '&keyword=' + keyword + '&categoryId=' + categoryId + '&size=' + size);
+  findAllByCategory(page: number, categoryId: number, size: number): Observable<Book[]> {
+    return this.http.get<Book[]>(API_URL + '/api/public/book/list?page=' + page + '&categoryId=' + categoryId + '&size=' + size);
   }
 
   findAllCategory(): Observable<Category[]> {
@@ -40,5 +40,37 @@ export class BookService {
 
   update(id: number, book: Book): Observable<Book> {
     return this.http.put<Book>(`${API_URL}/api/public/book/update/${id}`, book);
+  }
+
+  getCarts() {
+    let cartJson = sessionStorage.getItem('cart');
+    if (cartJson) {
+      return JSON.parse(cartJson);
+    } else {
+      return [];
+    }
+  }
+
+  saveCarts(cartList: any) {
+    let cartJson = JSON.stringify(cartList);
+    sessionStorage.setItem('cart', cartJson);
+  }
+
+  getTotalCartQuantity(): number {
+    let cartList = this.getCarts();
+    let totalQuantity = 0;
+    cartList.forEach((item: any) => {
+      totalQuantity += item.quantity;
+    })
+    return totalQuantity;
+  }
+
+  getTotalCartPrice(): number {
+    let cartList = this.getCarts();
+    let totalPrice = 0;
+    cartList.forEach((item: any) => {
+      totalPrice += item.quantity * item.price;
+    })
+    return totalPrice;
   }
 }

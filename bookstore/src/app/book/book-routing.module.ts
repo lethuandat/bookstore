@@ -6,12 +6,17 @@ import {BookUpdateComponent} from "./book-update/book-update.component";
 import {BookDetailComponent} from "./book-detail/book-detail.component";
 import {AuthGuard} from "../security/auth.guard";
 import {CartListComponent} from "../cart/cart-list/cart-list.component";
+import {BookByCategoryComponent} from "./book-by-category/book-by-category.component";
 
 
 const routes: Routes = [
   {
     path: 'book/list',
     component: BookListComponent
+  },
+  {
+    path: 'category/:id',
+    component: BookByCategoryComponent
   },
   {
     path: 'book/create',

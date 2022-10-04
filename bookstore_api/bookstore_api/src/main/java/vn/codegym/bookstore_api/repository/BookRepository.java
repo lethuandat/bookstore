@@ -26,15 +26,10 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     @Query(value = "select * " +
             "from book " +
-            "where `name` like %:keyword% " +
-            "and `description` like %:keyword% " +
-            "and author like %:keyword% " +
-            "and company like %:keyword% " +
-            "and is_deleted = 0 " +
-            "and category_id = :categoryId " +
+            "where category_id = :categoryId " +
             "order by id desc",
             nativeQuery = true)
-    Page<Book> findAllByCategory(Pageable pageable, @Param("keyword") String keyword, @Param("categoryId") Integer categoryId);
+    Page<Book> findAllByCategory(Pageable pageable, @Param("categoryId") Integer categoryId);
 
 
     @Query(value = "select * " +

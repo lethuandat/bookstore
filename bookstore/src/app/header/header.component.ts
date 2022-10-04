@@ -4,6 +4,7 @@ import {ShareService} from "../security/share.service";
 import {BookService} from "../book/book.service";
 import {Title} from "@angular/platform-browser";
 import {Category} from "../model/category";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit {
   constructor(private tokenStorageService: TokenStorageService,
               private shareService: ShareService,
               private bookService: BookService,
+              private router: Router,
               private title: Title) {
     this.title.setTitle("TD Bookstore - Online website");
     this.shareService.getClickEvent().subscribe(() => {
@@ -49,5 +51,9 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     this.tokenStorageService.signOut();
+  }
+
+  getCategory(id: number) {
+    this.router.navigate([`category/${id}`]);
   }
 }

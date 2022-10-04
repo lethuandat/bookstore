@@ -10,6 +10,7 @@ import {finalize} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {formatDate} from "@angular/common";
 import {checkDay} from "../../validated/check-day";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-book-create',
@@ -82,10 +83,12 @@ export class BookCreateComponent implements OnInit {
           };
           this.bookService.save(book).subscribe(() => {
             this.router.navigate(['/book/list']);
-            this.toastrService.success('Thêm mới thành công.', 'Thông báo');
+            // this.toastrService.success('Thêm mới thành công.', 'Thông báo');
+            Swal.fire('Thông báo', 'Thêm mới thành công', 'success');
           }, error => {
             console.log(error);
-            this.toastrService.error('Thêm mới thất bại.', 'Thông báo');
+            Swal.fire('Thông báo', 'Thêm mới thất bại', 'error');
+            //this.toastrService.error('Thêm mới thất bại.', 'Thông báo');
           });
         });
       })

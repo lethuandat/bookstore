@@ -1,22 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {Book} from "../../model/book";
+import { Component, OnInit } from '@angular/core';
 import {BookService} from "../book.service";
+import {ActivatedRoute, ParamMap} from "@angular/router";
+import {Book} from "../../model/book";
+import Swal from "sweetalert2";
+import {Category} from "../../model/category";
 import {ToastrService} from "ngx-toastr";
 import {Title} from "@angular/platform-browser";
 import {TokenStorageService} from "../../security/token-storage.service";
 import {ShareService} from "../../security/share.service";
-import {Category} from "../../model/category";
-import {ActivatedRoute, ParamMap} from "@angular/router";
-import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-book-list',
-  templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.css']
+  selector: 'app-book-by-category',
+  templateUrl: './book-by-category.component.html',
+  styleUrls: ['./book-by-category.component.css']
 })
-export class BookListComponent implements OnInit {
+export class BookByCategoryComponent implements OnInit {
   books: Book[] = [];
-  id: number;
+  categoryId: number;
   number: number;
   indexPagination = 0;
   totalPage: Array<number>;
@@ -26,7 +26,6 @@ export class BookListComponent implements OnInit {
   pageSize: number;
   displayPagination = 'inline-block';
   numberOfElement = 0;
-  keyword = '';
   nameDelete: string;
   idDelete: number;
 
@@ -43,16 +42,33 @@ export class BookListComponent implements OnInit {
               private tokenStorageService: TokenStorageService,
               private shareService: ShareService,
               private activatedRoute: ActivatedRoute) {
-    this.title.setTitle("Tất cả sách");
-    this.shareService.getClickEvent().subscribe(() => {
-      this.loadHeader();
+    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+      this.categoryId = +paramMap.get('categoryId');
+      this.bookService.findAllByCategory(this.indexPagination, this.categoryId, this.pageSize).subscribe((result?: any) => {
+        if (result === null) {
+          this.totalPage = new Array(0);
+          this.books = [];
+          this.displayPagination = 'none';
+        } else {
+          this.number = result?.number;
+          this.pageSize = result?.size;
+          this.numberOfElement = result?.numberOfElements;
+          this.books = result.content;
+          this.totalElements = result?.totalElements;
+          this.totalPage = new Array(result?.totalPages);
+        }
+        this.checkPreviousAndNext();
+      });
+      this.title.setTitle("Tất cả sách");
+      this.shareService.getClickEvent().subscribe(() => {
+        this.loadHeader();
+      });
     });
   }
 
   ngOnInit(): void {
     this.getAllCategory();
     this.loadHeader();
-    this.getAll();
   }
 
   getAllCategory(): void {
@@ -68,24 +84,6 @@ export class BookListComponent implements OnInit {
       this.username = this.tokenStorageService.getUser().username;
     }
     this.isLoggedIn = this.username != null;
-  }
-
-  getAll(): void {
-    this.bookService.findAll(this.indexPagination, this.keyword, this.pageSize).subscribe((result?: any) => {
-      if (result === null) {
-        this.totalPage = new Array(0);
-        this.books = [];
-        this.displayPagination = 'none';
-      } else {
-        this.number = result?.number;
-        this.pageSize = result?.size;
-        this.numberOfElement = result?.numberOfElements;
-        this.books = result.content;
-        this.totalElements = result?.totalElements;
-        this.totalPage = new Array(result?.totalPages);
-      }
-      this.checkPreviousAndNext();
-    });
   }
 
   openDelete(book: Book) {

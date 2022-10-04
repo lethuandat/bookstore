@@ -8,14 +8,15 @@ import {BookUpdateComponent} from './book-update/book-update.component';
 import {BookDetailComponent} from './book-detail/book-detail.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {CartModule} from "../cart/cart.module";
-
+import { BookByCategoryComponent } from './book-by-category/book-by-category.component';
 
 @NgModule({
   declarations: [
     BookListComponent,
     BookCreateComponent,
     BookUpdateComponent,
-    BookDetailComponent],
+    BookDetailComponent,
+    BookByCategoryComponent],
   imports: [
     CommonModule,
     CartModule,

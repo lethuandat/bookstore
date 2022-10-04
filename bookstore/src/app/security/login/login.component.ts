@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {AuthService} from "../auth.service";
 import {ShareService} from "../share.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -58,11 +59,13 @@ export class LoginComponent implements OnInit {
       this.roles = this.tokenStorageService.getUser().roles;
       this.formGroup.reset();
       this.router.navigateByUrl(this.returnUrl);
-      this.toastr.success('Đăng nhập thành công', 'Thông báo');
+      // this.toastr.success('Đăng nhập thành công', 'Thông báo');
+      Swal.fire('Thông báo', 'Đăng nhập thành công', 'success');
       this.shareService.sendClickEvent();
     }, err => {
       this.authService.isLoggedIn = false;
-      this.toastr.error('Sai tên đăng nhập hoặc mật khẩu hoặc tài khoản chưa được kích hoạt', 'Thông báo');
+      Swal.fire('Đăng nhập thất bại', 'Sai tên đăng nhập hoặc mật khẩu', 'error');
+      // this.toastr.error('Sai tên đăng nhập hoặc mật khẩu hoặc tài khoản chưa được kích hoạt', 'Thông báo');
     });
   }
 }

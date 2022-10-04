@@ -22,8 +22,8 @@ public class BookService implements IBookService {
 
 
     @Override
-    public Page<Book> findAllByCategory(Pageable pageable, String keyword, Integer categoryId) {
-        return bookRepository.findAllByCategory(pageable, keyword, categoryId);
+    public Page<Book> findAllByCategory(Pageable pageable, Integer categoryId) {
+        return bookRepository.findAllByCategory(pageable, categoryId);
     }
 
     @Override

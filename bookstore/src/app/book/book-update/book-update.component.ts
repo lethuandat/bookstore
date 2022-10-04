@@ -7,9 +7,9 @@ import {Category} from "../../model/category";
 import {Title} from "@angular/platform-browser";
 import {checkDay} from "../../validated/check-day";
 import {formatDate} from "@angular/common";
-import {Book} from "../../model/book";
 import {finalize} from "rxjs/operators";
 import {AngularFireStorage} from "@angular/fire/storage";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-book-update',
@@ -139,10 +139,12 @@ export class BookUpdateComponent implements OnInit {
           this.bookForm.patchValue({image: url});
           this.bookService.update(this.id, this.bookForm.value).subscribe(() => {
             this.router.navigate(['/book/list']);
-            this.toastrService.success('Cập nhật thành công.', 'Thông báo');
+            Swal.fire('Thông báo', 'Cập nhật thành công', 'success');
+            //this.toastrService.success('Cập nhật thành công.', 'Thông báo');
           }, error => {
             console.log(error);
-            this.toastrService.error('Cập nhật thất bại.', 'Thông báo');
+            Swal.fire('Thông báo', 'Thêm mới thất bại', 'error');
+            //this.toastrService.error('Cập nhật thất bại.', 'Thông báo');
           });
         });
       })
