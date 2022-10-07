@@ -8,6 +8,7 @@ import {ShareService} from "../../security/share.service";
 import {Category} from "../../model/category";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import Swal from "sweetalert2";
+import {DataService} from "../data.service";
 
 @Component({
   selector: 'app-book-list',
@@ -37,13 +38,18 @@ export class BookListComponent implements OnInit {
   categories: Category[] = [];
   cartList: any = this.bookService.getCarts();
 
+
   constructor(private bookService: BookService,
               private toastrService: ToastrService,
               private title: Title,
               private tokenStorageService: TokenStorageService,
               private shareService: ShareService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private data: DataService) {
     this.title.setTitle("Tất cả sách");
+    // this.data.getData.subscribe((result: any) => {
+    //   this.keyword = result.keyword;
+    // })
     this.shareService.getClickEvent().subscribe(() => {
       this.loadHeader();
     });
@@ -165,6 +171,28 @@ export class BookListComponent implements OnInit {
       this.cartList.push(cartItem);
     }
     this.bookService.saveCarts(this.cartList);
+    this.data.changeData({
+      totalQuantity: this.bookService.getTotalCartQuantity()
+    });
     Swal.fire('Thông báo', 'Thêm vào giỏ hàng thành công', 'success');
+  }
+
+  checkRegex(content: string): boolean {
+    const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    return format.test(content);
+  }
+
+  search() {
+    if (this.checkRegex(this.keyword)) {
+      this.indexPagination = 0;
+      this.totalPage = new Array(0);
+      this.books = [];
+      this.displayPagination = 'none';
+      this.checkPreviousAndNext();
+    } else {
+      this.indexPagination = 0;
+      this.displayPagination = 'inline-block';
+      this.getAll();
+    }
   }
 }

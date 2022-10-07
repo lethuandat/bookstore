@@ -20,6 +20,9 @@ public class Customer {
     private String name;
 
     @Column(columnDefinition = "VARCHAR(255)")
+    private String idCard;
+
+    @Column(columnDefinition = "VARCHAR(255)")
     private String email;
 
     private LocalDate birthDay;

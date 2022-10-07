@@ -41,7 +41,7 @@
             <td class="align-left">
               {{item.name}}
             </td>
-            <td class="align-middle">{{item.price | currency: ' '}}đ</td>
+            <td class="align-middle">{{item.price | currency: ' ': ' ': '6.0'}}đ</td>
             <td class="align-middle">
               <div class="input-group quantity mx-auto" style="width: 100px;">
                 <div class="input-group-btn">
@@ -58,7 +58,7 @@
                 </div>
               </div>
             </td>
-            <td class="align-middle">{{subTotal(item) | currency: ' '}}đ</td>
+            <td class="align-middle">{{subTotal(item) | currency: ' ': ' ': '6.0'}}đ</td>
             <td class="align-middle">
               <button class="btn btn-sm btn-danger" (click)="removeCart(i)"><i class="fa fa-times"></i></button>
             </td>
@@ -70,7 +70,8 @@
         <button type="button" class="close" aria-hidden="true">
 
         </button>
-        <strong>Giỏ hàng hiện tại chưa có sản phẩm nào. </strong> <a style="color: #0c5460" routerLink="/book/list">Click vào đây</a> để tiếp tục mua hàng...
+        <strong>Giỏ hàng hiện tại chưa có sản phẩm nào. </strong> <a style="color: #0c5460" routerLink="/book/list">Click
+        vào đây</a> để tiếp tục mua hàng...
       </div>
     </div>
     <div class="col-lg-4">
@@ -98,9 +99,11 @@
         <div class="pt-2">
           <div class="d-flex justify-content-between mt-2">
             <h5>Tổng tiền</h5>
-            <h5>{{totalPrice | currency: ' '}}đ</h5>
+            <h5>{{totalPrice | currency: ' ': ' ': '6.0'}}đ</h5>
           </div>
-          <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Tiếp tục thanh toán</button>
+          <h3 class="btn btn-block btn-primary font-weight-bold my-3 py-3">Thanh toán</h3>
+          <div id="myPaypalButtons"></div>
+
         </div>
       </div>
     </div>

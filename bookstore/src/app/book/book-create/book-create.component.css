@@ -1,26 +1,39 @@
-figure {
-  height: 300px;
-  position: relative;
-}
+/*figure {*/
+/*  height: 300px;*/
+/*  position: relative;*/
+/*}*/
 
-figure:before,
-figure:after {
-  content: '';
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  position: absolute;
-}
+/*figure:before,*/
+/*figure:after {*/
+/*  content: '';*/
+/*  height: 100%;*/
+/*  width: 100%;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  position: absolute;*/
+/*}*/
 
-img {
-  object-fit: contain;
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-}
+/*img {*/
+/*  object-fit: contain;*/
+/*  max-width: 100%;*/
+/*  max-height: 100%;*/
+/*  width: auto;*/
+/*  height: auto;*/
+/*}*/
 
 .custom-file-input:hover {
   cursor: pointer;
+}
+
+.image {
+  text-align: center;
+}
+
+.image img {
+  display: flex;
+  margin: 0 auto;
+  align-content: center;
+  max-width: 300px;
+  max-height: 300px;
+  object-fit: cover;
 }

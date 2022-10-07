@@ -1,7 +1,6 @@
 package vn.codegym.bookstore_api.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,14 +31,15 @@ public class AppUser {
     private Boolean isDeleted;
 
     @OneToMany(mappedBy = "appUser")
-    @JsonIgnore
+    @JsonBackReference
     private List<UserRole> userRoles;
 
     @OneToMany(mappedBy = "appUser")
+    @JsonBackReference
     private List<Orders> orders;
 
     @OneToMany(mappedBy = "appUser")
-    @JsonIgnore
+    @JsonBackReference
     private List<Comment> comments;
 
     @OneToOne(mappedBy = "appUser")

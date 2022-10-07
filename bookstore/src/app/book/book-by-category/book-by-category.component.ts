@@ -28,6 +28,7 @@ export class BookByCategoryComponent implements OnInit {
   numberOfElement = 0;
   nameDelete: string;
   idDelete: number;
+  keyword = '';
 
   username: string;
   currentUser: string;
@@ -44,21 +45,6 @@ export class BookByCategoryComponent implements OnInit {
               private activatedRoute: ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.categoryId = +paramMap.get('categoryId');
-      this.bookService.findAllByCategory(this.indexPagination, this.categoryId, this.pageSize).subscribe((result?: any) => {
-        if (result === null) {
-          this.totalPage = new Array(0);
-          this.books = [];
-          this.displayPagination = 'none';
-        } else {
-          this.number = result?.number;
-          this.pageSize = result?.size;
-          this.numberOfElement = result?.numberOfElements;
-          this.books = result.content;
-          this.totalElements = result?.totalElements;
-          this.totalPage = new Array(result?.totalPages);
-        }
-        this.checkPreviousAndNext();
-      });
       this.title.setTitle("Tất cả sách");
       this.shareService.getClickEvent().subscribe(() => {
         this.loadHeader();
@@ -69,6 +55,27 @@ export class BookByCategoryComponent implements OnInit {
   ngOnInit(): void {
     this.getAllCategory();
     this.loadHeader();
+    this.getAllByCategory()
+  }
+
+  getAllByCategory(): void {
+    console.log(this.keyword)
+    console.log(this.categoryId)
+    this.bookService.findAllByCategory(this.indexPagination, this.keyword, this.categoryId, this.pageSize).subscribe((result?: any) => {
+      if (result === null) {
+        this.totalPage = new Array(0);
+        this.books = [];
+        this.displayPagination = 'none';
+      } else {
+        this.number = result?.number;
+        this.pageSize = result?.size;
+        this.numberOfElement = result?.numberOfElements;
+        this.books = result.content;
+        this.totalElements = result?.totalElements;
+        this.totalPage = new Array(result?.totalPages);
+      }
+      this.checkPreviousAndNext();
+    });
   }
 
   getAllCategory(): void {
@@ -164,5 +171,24 @@ export class BookByCategoryComponent implements OnInit {
     }
     this.bookService.saveCarts(this.cartList);
     Swal.fire('Thông báo', 'Thêm vào giỏ hàng thành công', 'success');
+  }
+
+  checkRegex(content: string): boolean {
+    const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    return format.test(content);
+  }
+
+  search() {
+    if (this.checkRegex(this.keyword)) {
+      this.indexPagination = 0;
+      this.totalPage = new Array(0);
+      this.books = [];
+      this.displayPagination = 'none';
+      this.checkPreviousAndNext();
+    } else {
+      this.indexPagination = 0;
+      this.displayPagination = 'inline-block';
+      this.ngOnInit();
+    }
   }
 }

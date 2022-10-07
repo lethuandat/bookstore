@@ -6,7 +6,7 @@ import {BookListComponent} from './book-list/book-list.component';
 import {BookCreateComponent} from './book-create/book-create.component';
 import {BookUpdateComponent} from './book-update/book-update.component';
 import {BookDetailComponent} from './book-detail/book-detail.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CartModule} from "../cart/cart.module";
 import { BookByCategoryComponent } from './book-by-category/book-by-category.component';
 
@@ -17,12 +17,13 @@ import { BookByCategoryComponent } from './book-by-category/book-by-category.com
     BookUpdateComponent,
     BookDetailComponent,
     BookByCategoryComponent],
-  imports: [
-    CommonModule,
-    CartModule,
-    BookRoutingModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        CartModule,
+        BookRoutingModule,
+        ReactiveFormsModule,
+        FormsModule
+    ]
 })
 export class BookModule {
 }

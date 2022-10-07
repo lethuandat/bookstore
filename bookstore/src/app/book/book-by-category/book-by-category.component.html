@@ -1,13 +1,27 @@
 <!-- Breadcrumb Start -->
 <div class="container-fluid">
   <div class="row px-xl-5">
-    <div class="col-12">
+    <div class="col-lg-4 col-6">
       <nav class="breadcrumb bg-light mb-30">
         <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
         <a class="breadcrumb-item text-dark" href="#">Sách</a>
         <span class="breadcrumb-item active">Tất cả sách</span>
       </nav>
     </div>
+    <div class="col-lg-4 col-6 text-left">
+
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Nhập tên sách cần tìm" name="keyword"
+               [(ngModel)]="keyword" (keydown.enter)="search()">
+        <div class="input-group-append">
+                            <span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-search" (click)="search()"></i>
+                            </span>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-4"></div>
   </div>
 </div>
 <!-- Breadcrumb End -->
@@ -165,9 +179,9 @@
             <div class="text-center py-4">
               <a class="h6 text-decoration-none text-truncate" href="">{{item.name}}</a>
               <div class="d-flex align-items-center justify-content-center mt-2">
-                <h5>{{item.price}}</h5>
+                <h5>{{item.price | currency: ' ': ' ': '6.0'}}đ</h5>
                 <h6 class="text-muted ml-2">
-                  <del>{{item.price}}</del>
+                  <del>{{item.price | currency: ' ': ' ': '6.0'}}đ</del>
                 </h6>
               </div>
               <div class="d-flex align-items-center justify-content-center mb-1">

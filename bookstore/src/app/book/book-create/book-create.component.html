@@ -119,11 +119,11 @@
 
           </div>
           <div class="row">
-            <div class="col-md-6 custom-file form-group">
+            <div class="col-lg-6 custom-file form-group">
               <label class="custom-file-label">Nhấn để chọn ảnh</label>
               <input type="file" class="custom-file-input" (change)="selectFile($event); onFileSelected($event)">
             </div>
-            <div class="col-md-6 custom-file form-group">
+            <div class="col-lg-6 custom-file form-group image">
               <div>
                 <figure>
                   <img *ngIf="!editImageState" [src]="bookForm.get('image').value" width="100%" height="auto" alt="">

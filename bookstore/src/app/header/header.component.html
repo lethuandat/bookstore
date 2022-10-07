@@ -19,7 +19,10 @@
           </div>
         </div>
         <div class="btn-group" [hidden]="!isLoggedIn">
-          <button type="button" class="btn btn-sm btn-light">Xin chào, <span class="text-primary">{{username}}</span></button>
+<!--          <figure>-->
+<!--            <img src="{{customer.image}}" alt="">-->
+<!--          </figure>-->
+          <button type="button" class="btn btn-sm btn-light"><span class="text-primary">{{customer.name}}</span></button>
           <a href="" class="btn btn-sm btn-light" (click)="logOut()">Đăng xuất</a>
         </div>
         <div class="btn-group mx-2">
@@ -44,7 +47,7 @@
           <i class="fas fa-heart text-dark"></i>
           <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
         </a>
-        <a href="" class="btn px-0 ml-2">
+        <a routerLink="cart/list" class="btn px-0 ml-2">
           <i class="fas fa-shopping-cart text-dark"></i>
           <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
         </a>
@@ -61,9 +64,9 @@
     <div class="col-lg-4 col-6 text-left">
       <form action="">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Nhập tên sách cần tìm">
+          <input type="text" class="form-control" placeholder="Nhập tên sách cần tìm" name="keyword" [(ngModel)]="keyword">
           <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
+                            <span class="input-group-text bg-transparent text-primary" (click)="search()">
                                 <i class="fa fa-search"></i>
                             </span>
           </div>
@@ -120,9 +123,9 @@
               <i class="fas fa-heart text-primary"></i>
               <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
             </a>
-            <a href="" class="btn px-0 ml-3">
+            <a href="" class="btn px-0 ml-3" routerLink="cart/list">
               <i class="fas fa-shopping-cart text-primary"></i>
-              <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+              <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">{{totalQuantity}}</span>
             </a>
           </div>
         </div>

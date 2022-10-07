@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {BookService} from "../../book/book.service";
 import Swal from "sweetalert2";
+import {DataService} from "../../book/data.service";
+import {render} from 'creditcardpayments/creditCardPayments';
 
 @Component({
   selector: 'app-cart-list',
@@ -11,11 +13,23 @@ export class CartListComponent implements OnInit {
   cartList: any = [];
   totalQuantity: number = this.bookService.getTotalCartQuantity();
   totalPrice: number = this.bookService.getTotalCartPrice();
+  usdPrice = ((this.totalPrice / 23000).toFixed(2)).toString();
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService,
+              private data: DataService) {
+  }
 
   ngOnInit(): void {
     this.cartList = this.bookService.getCarts();
+    render({
+      id: '#myPaypalButtons',
+      currency: 'USD',
+      value: this.usdPrice,
+      onApprove: (details) => {
+        this.cartList.
+        Swal.fire('Thanh toán thành công', 'Hàng sẽ được giao trong vòng 3 ngày', 'success');
+      }
+    });
   }
 
   subTotal(cart: any) {
@@ -30,6 +44,9 @@ export class CartListComponent implements OnInit {
     this.bookService.saveCarts(this.cartList);
     this.totalQuantity = this.bookService.getTotalCartQuantity();
     this.totalPrice = this.bookService.getTotalCartPrice();
+    this.data.changeData({
+      totalQuantity: this.bookService.getTotalCartQuantity()
+    })
   }
 
   minusQuantity(index: number, quantity: any) {
@@ -39,6 +56,9 @@ export class CartListComponent implements OnInit {
     this.bookService.saveCarts(this.cartList);
     this.totalQuantity = this.bookService.getTotalCartQuantity();
     this.totalPrice = this.bookService.getTotalCartPrice();
+    this.data.changeData({
+      totalQuantity: this.bookService.getTotalCartQuantity()
+    })
   }
 
   plusQuantity(index: number, quantity: any) {
@@ -47,6 +67,9 @@ export class CartListComponent implements OnInit {
     this.bookService.saveCarts(this.cartList);
     this.totalQuantity = this.bookService.getTotalCartQuantity();
     this.totalPrice = this.bookService.getTotalCartPrice();
+    this.data.changeData({
+      totalQuantity: this.bookService.getTotalCartQuantity()
+    })
   }
 
   removeCart(index: number) {
@@ -70,6 +93,9 @@ export class CartListComponent implements OnInit {
         _this.bookService.saveCarts(_this.cartList);
         this.totalQuantity = this.bookService.getTotalCartQuantity();
         this.totalPrice = this.bookService.getTotalCartPrice();
+        this.data.changeData({
+          totalQuantity: this.bookService.getTotalCartQuantity()
+        })
       }
     })
   }

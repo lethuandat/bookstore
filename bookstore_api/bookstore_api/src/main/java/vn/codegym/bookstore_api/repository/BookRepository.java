@@ -15,9 +15,9 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     @Query(value = "select * " +
             "from book " +
             "where `name` like %:keyword% " +
-            "and `description` like %:keyword% " +
-            "and author like %:keyword% " +
-            "and company like %:keyword% " +
+            "or `description` like %:keyword% " +
+            "or author like %:keyword% " +
+            "or company like %:keyword% " +
             "and is_deleted = 0 " +
             "order by id desc",
             nativeQuery = true)
@@ -26,10 +26,15 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     @Query(value = "select * " +
             "from book " +
-            "where category_id = :categoryId " +
+            "where (`name` like %:keyword% " +
+            "or `description` like %:keyword% " +
+            "or author like %:keyword% " +
+            "or company like %:keyword%) " +
+            "and category_id = :categoryId " +
+            "and is_deleted = 0 " +
             "order by id desc",
             nativeQuery = true)
-    Page<Book> findAllByCategory(Pageable pageable, @Param("categoryId") Integer categoryId);
+    Page<Book> findAllByCategory(Pageable pageable, @Param("keyword") String keyword, @Param("categoryId") Integer categoryId);
 
 
     @Query(value = "select * " +
@@ -88,6 +93,8 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "update book set is_deleted = 1 where id =:id", nativeQuery = true)
+    @Query(value = "update book " +
+            "set is_deleted = 1 " +
+            "where id =:id", nativeQuery = true)
     void delete(@Param("id") Integer id);
 }

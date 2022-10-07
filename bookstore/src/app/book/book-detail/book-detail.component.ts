@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {BookService} from "../book.service";
 import {ToastrService} from "ngx-toastr";
 import {ActivatedRoute, ParamMap} from "@angular/router";
+import Swal from "sweetalert2";
+import {DataService} from "../data.service";
+import {Book} from "../../model/book";
 
 @Component({
   selector: 'app-book-detail',
@@ -9,22 +12,16 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
   styleUrls: ['./book-detail.component.css']
 })
 export class BookDetailComponent implements OnInit {
+  book: Book;
   id: number;
-  name: string;
-  description: string;
-  image: string;
-  size: string;
-  price: number;
-  numberOfPage: number;
-  quantity: number;
-  date: string;
-  author: string;
-  category: string;
-  company: string;
+  totalQuantity: number = this.bookService.getTotalCartQuantity();
+  totalPrice: number = this.bookService.getTotalCartPrice();
+  cartList: any = this.bookService.getCarts();
 
   constructor(private bookService: BookService,
               private toastrService: ToastrService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private data: DataService) {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get('id');
       this.findById(this.id);
@@ -36,17 +33,67 @@ export class BookDetailComponent implements OnInit {
 
   findById(id: number) {
     return this.bookService.findById(id).subscribe(book => {
-      this.name = book.name;
-      this.description = book.description;
-      this.image = book.image;
-      this.size = book.size;
-      this.price = book.price;
-      this.numberOfPage = book.numberOfPage;
-      this.author = book.author;
-      this.category = book.categories.name;
-      this.company = book.company;
-      this.quantity = book.quantity;
-      this.date = book.date;
+      this.book = book;
     });
+  }
+
+  addToCart(book: any) {
+    let index = this.cartList.findIndex((item: any) => {
+      return item.id == book.id;
+    });
+
+    if (index >= 0) {
+      this.cartList[index].quantity += 1;
+    } else {
+      let cartItem: any = {
+        id: book.id,
+        name: book.name,
+        price: book.price,
+        quantity: 1,
+        image: book.image
+      }
+      this.cartList.push(cartItem);
+    }
+    this.bookService.saveCarts(this.cartList);
+    this.data.changeData({
+      totalQuantity: this.bookService.getTotalCartQuantity()
+    })
+    Swal.fire('Thông báo', 'Thêm vào giỏ hàng thành công', 'success');
+  }
+
+  updateQuantity(index: number, event: any) {
+    let newQuantity = event.target.value;
+    newQuantity =  newQuantity > 0 ? newQuantity : 1;
+    event.target.value = newQuantity;
+    this.cartList[index].quantity = newQuantity;
+    this.bookService.saveCarts(this.cartList);
+    this.totalQuantity = this.bookService.getTotalCartQuantity();
+    this.totalPrice = this.bookService.getTotalCartPrice();
+    this.data.changeData({
+      totalQuantity: this.bookService.getTotalCartQuantity()
+    })
+  }
+
+  minusQuantity(index: number, quantity: any) {
+    let newQuantity = parseInt(quantity) - 1;
+    newQuantity =  newQuantity > 0 ? newQuantity : 1;
+    this.cartList[index].quantity = newQuantity;
+    this.bookService.saveCarts(this.cartList);
+    this.totalQuantity = this.bookService.getTotalCartQuantity();
+    this.totalPrice = this.bookService.getTotalCartPrice();
+    this.data.changeData({
+      totalQuantity: this.bookService.getTotalCartQuantity()
+    })
+  }
+
+  plusQuantity(index: number, quantity: any) {
+    let newQuantity = parseInt(quantity) + 1;
+    this.cartList[index].quantity = newQuantity;
+    this.bookService.saveCarts(this.cartList);
+    this.totalQuantity = this.bookService.getTotalCartQuantity();
+    this.totalPrice = this.bookService.getTotalCartPrice();
+    this.data.changeData({
+      totalQuantity: this.bookService.getTotalCartQuantity()
+    })
   }
 }

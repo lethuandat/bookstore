@@ -38,8 +38,9 @@ public class BookRestController {
 
     @GetMapping("/listByCategory")
     public ResponseEntity<Page<Book>> findAllByCategory(@PageableDefault(value = 9) Pageable pageable,
-                                            @RequestParam Integer categoryId) {
-        Page<Book> books = iBookService.findAllByCategory(pageable, categoryId);
+                                                        @RequestParam Optional<String> keyword,
+                                                        @RequestParam Integer categoryId) {
+        Page<Book> books = iBookService.findAllByCategory(pageable, keyword.orElse(""), categoryId);
         if (books.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

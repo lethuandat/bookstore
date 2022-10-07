@@ -1,13 +1,27 @@
 <!-- Breadcrumb Start -->
 <div class="container-fluid">
   <div class="row px-xl-5">
-    <div class="col-12">
+    <div class="col-lg-4 col-6">
       <nav class="breadcrumb bg-light mb-30">
         <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
         <a class="breadcrumb-item text-dark" href="#">Sách</a>
         <span class="breadcrumb-item active">Tất cả sách</span>
       </nav>
     </div>
+    <div class="col-lg-4 col-6 text-left">
+
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Nhập tên sách cần tìm" name="keyword"
+               [(ngModel)]="keyword" (keydown.enter)="search()">
+        <div class="input-group-append">
+                            <span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-search" (click)="search()"></i>
+                            </span>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-4"></div>
   </div>
 </div>
 <!-- Breadcrumb End -->
@@ -53,13 +67,13 @@
       </h5>
       <div class="bg-light p-4 mb-30">
         <div *ngFor="let item of categories">
-<!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
-<!--            <input type="checkbox" class="custom-control-input" checked id="color-all">-->
-<!--            <label class="custom-control-label" for="price-all">Tất cả thể loại</label>-->
-<!--            <span class="badge border font-weight-normal">1000</span>-->
-<!--          </div>-->
+          <!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+          <!--            <input type="checkbox" class="custom-control-input" checked id="color-all">-->
+          <!--            <label class="custom-control-label" for="price-all">Tất cả thể loại</label>-->
+          <!--            <span class="badge border font-weight-normal">1000</span>-->
+          <!--          </div>-->
           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-<!--            <a class="btn btn-primary" [routerLink]="['/book/list', item.id]">{{item.name}}</a>-->
+            <!--            <a class="btn btn-primary" [routerLink]="['/book/list', item.id]">{{item.name}}</a>-->
             <input id="ca" type="checkbox" class="custom-control-input" [id]="item.id">
             <label for="ca" class="custom-control-label">{{item.name}}</label>
             <span class="badge border font-weight-normal">150</span>
@@ -69,43 +83,43 @@
       <!-- Category End -->
 
       <!-- Size Start -->
-<!--      <h5 class="section-title position-relative text-uppercase mb-3"><span-->
-<!--        class="bg-secondary pr-3">Filter by size</span>-->
-<!--      </h5>-->
-<!--      <div class="bg-light p-4 mb-30">-->
-<!--        <div>-->
-<!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
-<!--            <input type="checkbox" class="custom-control-input" checked id="size-all">-->
-<!--            <label class="custom-control-label" for="size-all">All Size</label>-->
-<!--            <span class="badge border font-weight-normal">1000</span>-->
-<!--          </div>-->
-<!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
-<!--            <input type="checkbox" class="custom-control-input" id="size-1">-->
-<!--            <label class="custom-control-label" for="size-1">XS</label>-->
-<!--            <span class="badge border font-weight-normal">150</span>-->
-<!--          </div>-->
-<!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
-<!--            <input type="checkbox" class="custom-control-input" id="size-2">-->
-<!--            <label class="custom-control-label" for="size-2">S</label>-->
-<!--            <span class="badge border font-weight-normal">295</span>-->
-<!--          </div>-->
-<!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
-<!--            <input type="checkbox" class="custom-control-input" id="size-3">-->
-<!--            <label class="custom-control-label" for="size-3">M</label>-->
-<!--            <span class="badge border font-weight-normal">246</span>-->
-<!--          </div>-->
-<!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
-<!--            <input type="checkbox" class="custom-control-input" id="size-4">-->
-<!--            <label class="custom-control-label" for="size-4">L</label>-->
-<!--            <span class="badge border font-weight-normal">145</span>-->
-<!--          </div>-->
-<!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">-->
-<!--            <input type="checkbox" class="custom-control-input" id="size-5">-->
-<!--            <label class="custom-control-label" for="size-5">XL</label>-->
-<!--            <span class="badge border font-weight-normal">168</span>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
+      <!--      <h5 class="section-title position-relative text-uppercase mb-3"><span-->
+      <!--        class="bg-secondary pr-3">Filter by size</span>-->
+      <!--      </h5>-->
+      <!--      <div class="bg-light p-4 mb-30">-->
+      <!--        <div>-->
+      <!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+      <!--            <input type="checkbox" class="custom-control-input" checked id="size-all">-->
+      <!--            <label class="custom-control-label" for="size-all">All Size</label>-->
+      <!--            <span class="badge border font-weight-normal">1000</span>-->
+      <!--          </div>-->
+      <!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+      <!--            <input type="checkbox" class="custom-control-input" id="size-1">-->
+      <!--            <label class="custom-control-label" for="size-1">XS</label>-->
+      <!--            <span class="badge border font-weight-normal">150</span>-->
+      <!--          </div>-->
+      <!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+      <!--            <input type="checkbox" class="custom-control-input" id="size-2">-->
+      <!--            <label class="custom-control-label" for="size-2">S</label>-->
+      <!--            <span class="badge border font-weight-normal">295</span>-->
+      <!--          </div>-->
+      <!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+      <!--            <input type="checkbox" class="custom-control-input" id="size-3">-->
+      <!--            <label class="custom-control-label" for="size-3">M</label>-->
+      <!--            <span class="badge border font-weight-normal">246</span>-->
+      <!--          </div>-->
+      <!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+      <!--            <input type="checkbox" class="custom-control-input" id="size-4">-->
+      <!--            <label class="custom-control-label" for="size-4">L</label>-->
+      <!--            <span class="badge border font-weight-normal">145</span>-->
+      <!--          </div>-->
+      <!--          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">-->
+      <!--            <input type="checkbox" class="custom-control-input" id="size-5">-->
+      <!--            <label class="custom-control-label" for="size-5">XL</label>-->
+      <!--            <span class="badge border font-weight-normal">168</span>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
       <!-- Size End -->
     </div>
     <!-- Shop Sidebar End -->
@@ -119,7 +133,8 @@
             <div>
               <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
               <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
-              <button *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1" type="button" class="btn btn-sm btn-warning text-dark mx-4" routerLink="/book/create">Thêm mới
+              <button *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1" type="button"
+                      class="btn btn-sm btn-warning text-dark mx-4" routerLink="/book/create">Thêm mới
               </button>
             </div>
             <div class="ml-2">
@@ -156,18 +171,20 @@
                   class="fa fa-shopping-cart"></i></a>
                 <a class="btn btn-outline-dark btn-square" [routerLink]="['/book/detail', item.id]"><i
                   class="fa fa-info"></i></a>
-                <a class="btn btn-outline-dark btn-square" *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1" [routerLink]="['/book/edit', item.id]"><i
+                <a class="btn btn-outline-dark btn-square" *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1"
+                   [routerLink]="['/book/edit', item.id]"><i
                   class="fa fa-edit"></i></a>
-                <a class="btn btn-outline-dark btn-square" *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1" (click)="openDelete(item)" data-toggle="modal"
+                <a class="btn btn-outline-dark btn-square" *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1"
+                   (click)="openDelete(item)" data-toggle="modal"
                    data-target="#deleteModal"><i class="fa fa-trash"></i></a>
               </div>
             </div>
             <div class="text-center py-4">
               <a class="h6 text-decoration-none text-truncate" href="">{{item.name}}</a>
               <div class="d-flex align-items-center justify-content-center mt-2">
-                <h5>{{item.price | currency: ' '}}đ</h5>
+                <h5>{{item.price | currency: ' ': ' ': '6.0'}}đ</h5>
                 <h6 class="text-muted ml-2">
-                  <del>{{item.price | currency: ' '}}đ</del>
+                  <del>{{item.price | currency: ' ': ' ': '6.0'}}đ</del>
                 </h6>
               </div>
               <div class="d-flex align-items-center justify-content-center mb-1">
@@ -181,33 +198,49 @@
             </div>
           </div>
         </div>
+
         <div class="col-12 mt-5">
           <div [ngStyle]="{'display':displayPagination}">
             <div style="position: absolute;bottom: 26px;right: 49px">
               <div style="display: flex;align-items: center;justify-content: center">
-<!--                <span style="margin: 0 10px 0 0">Số phần tử của trang:</span>-->
-<!--                <select (change)="changePageSize($event)" style="width: 80px" class="form-select">-->
-<!--                  <option value="6">6</option>-->
-<!--                  <option value="9">9</option>-->
-<!--                  <option value="12">12</option>-->
-<!--                </select>-->
+                <!--                <span style="margin: 0 10px 0 0">Số phần tử của trang:</span>-->
+                <!--                <select (change)="changePageSize($event)" style="width: 80px" class="form-select">-->
+                <!--                  <option value="6">6</option>-->
+                <!--                  <option value="9">9</option>-->
+                <!--                  <option value="12">12</option>-->
+                <!--                </select>-->
                 <span style="margin: 0 20px 0 40px">
                     {{pageSize * indexPagination + 1}} - {{pageSize * indexPagination + numberOfElement}}
                   trên {{totalElements}}
           </span>
                 <a (click)="previousPage($event)" [ngStyle]="{'display':previousPageStyle}" type="button"
-                        class="btn btn-warning">
-                 Trước
+                   class="btn btn-warning">
+                  Trước
                 </a>
                 <a (click)="nextPage($event)" [ngStyle]="{'display':nextPageStyle}" style="margin-left: 10px"
-                        type="button"
-                        class="btn btn-warning">
+                   type="button"
+                   class="btn btn-warning">
                   Sau
                 </a>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="row pb-3">
+            <div class="col-lg-12">
+              <div class="alert alert-danger" *ngIf="books.length == 0">
+                <button type="button" class="close" aria-hidden="true"></button>
+                <strong>Không tìm thấy {{keyword}} trong dữ liệu của shop. </strong>
+                <p><strong>Đề xuất:</strong></p>
+                <ul>
+                  <li>Xin bạn chắc chắn rằng tất cả các từ đều đúng chính tả.</li>
+                  <li>Hãy thử những từ khóa khác.</li>
+                  <li>Hãy thử những từ khóa chung hơn.</li>
+                  <li>Hãy thử bớt từ khóa.</li>
+                </ul>
+              </div>
+            </div>
       </div>
     </div>
     <!-- Shop Product End -->

@@ -17,6 +17,7 @@ import {CartModule} from "./cart/cart.module";
 import {SecurityModule} from "./security/security.module";
 import {ContactModule} from "./contact/contact.module";
 import {PaymentModule} from "./payment/payment.module";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -25,26 +26,27 @@ import {PaymentModule} from "./payment/payment.module";
     FooterComponent,
     HomeComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule,
-    BookModule,
-    CartModule,
-    SecurityModule,
-    ContactModule,
-    PaymentModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    ToastrModule.forRoot({
-      timeOut: 1000,
-      positionClass: 'toast-top-right',
-      progressBar: true,
-      tapToDismiss: true
-    })
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFirestoreModule,
+        BookModule,
+        CartModule,
+        SecurityModule,
+        ContactModule,
+        PaymentModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        ToastrModule.forRoot({
+            timeOut: 1000,
+            positionClass: 'toast-top-right',
+            progressBar: true,
+            tapToDismiss: true
+        }),
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
